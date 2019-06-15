@@ -1,0 +1,10 @@
+<h1>Books#posts_index</h1>
+<%= link_to 'new', new_book_path %><br><br>
+<% @books.each do |book| %>
+
+  <%= book.title %>
+  <%= link_to 'edit', edit_book_path(book) %>
+  <%= link_to 'destroy', book, method: :delete, data: { confirmtion: "削除してもいいですか？" } %>
+  <%= link_to 'volume-show', volume_path(book) %>
+
+<% end %>

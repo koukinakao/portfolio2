@@ -1,0 +1,10 @@
+<h1>Volumes#show</h1>
+<%= link_to 'new', new_volume_path(id: @book.id) %>
+<% @volumes.each do |volume| %>
+
+  <%= volume.title %>
+  <%= link_to 'edit', edit_volume_path(volume) %>
+  <%= link_to 'destroy', volume, method: :delete, data: { confirmtion: "削除してもいいですか？" } %>
+
+
+<% end %>

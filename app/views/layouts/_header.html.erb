@@ -1,0 +1,5 @@
+<%= link_to "login", login_path unless logged_in? %>
+<%= link_to "logout", logout_path, method: :delete if logged_in? %>
+<%= link_to 'new-user', new_user_path %>
+<%= link_to "users", users_path %>
+<%= link_to "posts-books", books_posts_path %>

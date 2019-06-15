@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  root 'users#index'
-   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'tops#show'
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+  get 'books/posts', to: 'books#posts_index'
+  get 'books/viewer', to: 'books#viewer_index'
+  resources :users
+  resources :books
+  resources :volumes
 end

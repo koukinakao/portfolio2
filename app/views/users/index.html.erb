@@ -1,10 +1,10 @@
 <h1>Users#index</h1>
-<%= @users.each do |user| %>
+<% @users.each do |user| %>
 
   <%= user.name %>
-  <br>
+  <%= link_to "show", user_path(user) %>
   <%= link_to 'edit', edit_user_path(user) %>
+  <%= link_to 'delete', user, method: :delete, data: { confirm: "削除してもいいですか？" }, class: "btn btn-primary" %>
+
 
 <% end %>
-<br>
-<%= link_to 'new', new_user_path %>

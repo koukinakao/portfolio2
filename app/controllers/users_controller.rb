@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show]
+  
   def index
     @users = User.all
   end
@@ -14,6 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
+      log_in @user
       redirect_to @user
     else
       render :new
