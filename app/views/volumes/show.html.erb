@@ -4,7 +4,8 @@
 
   <%= volume.title %>
   <%= link_to 'edit', edit_volume_path(volume) %>
-  <%= link_to 'destroy', volume, method: :delete, data: { confirmtion: "削除してもいいですか？" } %>
-
+  <%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %>
+  <%= volume.id %>
+  <%= link_to 'picture', volumes_path(id: volume.id) %><br>
 
 <% end %>

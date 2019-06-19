@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   get 'books/viewer', to: 'books#viewer_index'
   resources :users
   resources :books
-  resources :volumes
+  resources :volumes do
+    resources :pictures
+  end
 end

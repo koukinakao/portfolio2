@@ -1,5 +1,5 @@
 <h1>Users#index</h1>
-<% @users.each do |user| %>
+<%= @users.each do |user| %>
 
   <%= user.name %>
   <%= link_to "show", user_path(user) %>
