@@ -7,13 +7,20 @@
   
   <%= f.label :content %>
   <%= f.text_field :content, class: "form-control" %>
-  
+  <br>
   <%= f.fields_for :pictures do |pi| %>
-  <%= pi.file_field :picture,  multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
+  <%= f.hidden_field :volume_id, :value => @volume.id %>
+  <%= pi.hidden_field :id %>
+    <br><% unless pi.object.picture.blank? %>
+      <%= image_tag pi.object.picture.url %>
+     <%= pi.check_box :remove_picture %>画像を削除する
+    <% end %>
+    <%= pi.file_field :picture, class: "haha", multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
   <% end %>
   
+  <div id="picture_prev" ></div><br>
+  
   <%= f.submit "送信", class: "btn btn-primary" %>
-
 
 <% end %>
 
@@ -24,4 +31,47 @@
       alert('Maximum file size is 5MB. Please choose a smaller file.');
     }
   });
+  
+  $(document).ready(function() {
+
+     if(window.File && window.FileList && window.FileReader) {
+       console.log("動いた1")
+       var result = $('.haha').last().attr('id', 'text');;
+       console.log(result);
+        $(document).on('change', 'input[type=file]', function (e) {
+          var d =$(this)
+          console.log(d)
+            var files = e.target.files ,
+            filesLength = files.length ;
+            for (var i = 0; i < filesLength ; i++) {
+                var f = files[i]
+                var fileReader = new FileReader();
+                fileReader.onload = (function(e) {
+                    var file = e.target;
+                  $(d).prev().prev().prev().attr({'src': e.target.result, width: 480, height: 320});
+               });
+               fileReader.readAsDataURL(f);
+           }
+      });
+      $('#text').on('change', function (e) {
+            var files = e.target.files ,
+            filesLength = files.length ;
+            for (var i = 0; i < filesLength ; i++) {
+                var f = files[i]
+                var fileReader = new FileReader();
+                $('#picture_prev').empty();
+                fileReader.onload = (function(e) {
+                    var file = e.target;
+                    $('#picture_prev')
+                      .append("<br>")
+                      .append("新規画像")
+                      .append("<br>")
+                      .append($("<img/>").attr({'src': e.target.result, width: 480, height: 320}))
+               });
+               fileReader.readAsDataURL(f);
+           }
+      });
+     } else { alert("Your browser doesn't support to File API")
+     console.log("動いてない")}
+    });
 </script>

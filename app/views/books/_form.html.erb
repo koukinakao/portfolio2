@@ -6,6 +6,39 @@
   <%= f.label :content %>
   <%= f.text_field :content, class: "form-control" %>
   
+  <%= f.file_field :picture, id: :book_img, accept: 'image/jpeg,image/gif,image/png' %>
+  
+  <div id="picture_prev" ></div><br>
+  <% if @book.picture? %>
+  現在の画像<br>
+  <%= image_tag @book.picture.url %>
+  <p><%= f.check_box :remove_picture %>画像を削除する</p>
+  <% end %>
+  
+  
   <%= f.submit "送信", class: "btn btn-primary" %>
 
 <% end %>
+
+
+<script type="text/javascript">
+$(function() {
+ function readURL(input) {
+   if (input.files && input.files[0]) {
+     var reader = new FileReader();
+     $('#picture_prev').empty();
+     reader.onload = function (e) {
+       $('#picture_prev')
+         .append("<br>")
+         .append("新規画像")
+         .append("<br>")
+         .append($("<img/>").attr({'src': e.target.result, width: 480, height: 320}))
+         ;}
+     reader.readAsDataURL(input.files[0]);
+   }
+ }
+ $("#book_img").change(function(){
+   readURL(this);
+ });
+});
+</script>

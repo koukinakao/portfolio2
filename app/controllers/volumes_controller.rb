@@ -19,7 +19,7 @@ class VolumesController < ApplicationController
     @volume = @book.volumes.build(volume_params)
     if @volume.save
       picture_params[:pictures_attributes]["0"][:picture].map do |d|
-        picture = @volume.pictures.create!(picture: d, position: 1)
+        picture = @volume.pictures.create!(picture: d)
       end
       redirect_to volume_path(id: @volume.book_id)
     else
@@ -29,12 +29,31 @@ class VolumesController < ApplicationController
 
   def edit
     @volume = Volume.find(params[:id])
+     1.times { @volume.pictures.build }
   end
   
   def update
     @volume = Volume.find(params[:id])
     if @volume.update(volume_params)
-      redirect_to volume_path(@volume)
+      picture_params[:pictures_attributes].each do |g|
+        if g[1][:id].empty?
+          unless g[1][:picture].nil?
+            g[1][:picture].map do |pic|
+              @volume.pictures.create!(picture: pic)
+            end
+          end
+        else
+          @picture = Picture.find(g[1][:id])
+          if g[1][:remove_picture] == "1" || g[1][:remove_picture].nil?
+            @picture.destroy
+          elsif !g[1][:picture].nil?
+            g[1][:picture].map do |pic|
+              @picture.update(picture: pic)
+            end
+          end
+        end
+      end
+      redirect_to volume_path(id: @volume.book_id)
     else
       render :edit
     end
@@ -54,7 +73,7 @@ class VolumesController < ApplicationController
   end
   
   def picture_params
-    params.require(:volume).permit(pictures_attributes: {picture: []})
+    params.require(:volume).permit(pictures_attributes: {})
   end
   
   
