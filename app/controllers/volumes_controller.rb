@@ -7,6 +7,7 @@ class VolumesController < ApplicationController
   def show
     @book = Book.find_by(id: params[:id])
     @volumes = @book.volumes
+    @favorite_count = @book.favorites.count
   end
 
   def new

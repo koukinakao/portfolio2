@@ -36,8 +36,8 @@
 
      if(window.File && window.FileList && window.FileReader) {
        console.log("動いた1")
-       var result = $('.haha').last().attr('id', 'text');;
-       console.log(result);
+       var result = $('.haha').last().attr({'id': 'text', 'class': 'inputnew'});
+       $('.haha').removeAttr('multiple');
         $(document).on('change', 'input[type=file]', function (e) {
           var d =$(this)
           console.log(d)
@@ -48,7 +48,7 @@
                 var fileReader = new FileReader();
                 fileReader.onload = (function(e) {
                     var file = e.target;
-                  $(d).prev().prev().prev().attr({'src': e.target.result, width: 480, height: 320});
+                  $(d).prev().prev().prev().attr({'src': e.target.result, width: 200, height: 297});
                });
                fileReader.readAsDataURL(f);
            }
@@ -66,12 +66,12 @@
                       .append("<br>")
                       .append("新規画像")
                       .append("<br>")
-                      .append($("<img/>").attr({'src': e.target.result, width: 480, height: 320}))
+                      .append($("<img/>").attr({'src': e.target.result, width: 200, height: 297}))
                });
                fileReader.readAsDataURL(f);
            }
       });
      } else { alert("Your browser doesn't support to File API")
-     console.log("動いてない")}
+     }
     });
 </script>

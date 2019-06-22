@@ -1,12 +1,19 @@
 <h1>Books#posts_index</h1>
 <%= link_to 'new', new_book_path %><br><br>
 <% @books.each do |book| %>
-
-  <br><%= book.title %>
-  <%= link_to 'edit', edit_book_path(book) %>
-  <%= link_to 'destroy', book, method: :delete, data: { confirmtion: "削除してもいいですか？" } %>
-  <%= link_to 'volume-show', volume_path(book) %>
-  <%= image_tag book.picture.url if book.picture? %><br>
-
-
+  <div class= "book-details">
+    <div class="book-image">
+      <%= image_tag book.picture.url %>
+    </div>
+    <div class="book-description">
+      <h1 class= "book-description-title">Title: <%= book.title %></h1>
+      <p>
+        <%= link_to 'edit', edit_book_path(book) %>
+        <%= link_to 'destroy', book, method: :delete, data: { confirmtion: "削除してもいいですか？" } %>
+        <%= link_to 'volume-show', volume_path(book) %>
+      </p>
+      <p>Created date: <%= book.created_at %></p>
+      <p>content: <%= book.content %></p>
+    </div>
+  </div>
 <% end %>

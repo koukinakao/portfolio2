@@ -1,11 +1,39 @@
 <h1>Volumes#show</h1>
-<%= link_to 'new', new_volume_path(id: @book.id) %>
-<% @volumes.each do |volume| %>
+<div class= "book-details">
+  <div class="book-image">
+    <%= image_tag @book.picture.url %>
+  </div>
+  <div class="book-description">
+    <h1 class= "book-description-title">Title: <%= @book.title %></h1>
+    <%= render 'favorites/favorite' %>
+    <p>Author: <%= user_name_chenge(@book) %></p>
+    <p>
+      Created date: <%= @book.created_at %>
+      Updated date: <%= @book.updated_at %>
+    </p>
+    <p>content: <%= @book.content %></p>
+  </div>
+</div>
 
-  <%= volume.title %>
-  <%= link_to 'edit', edit_volume_path(volume) %>
-  <%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %>
-  <%= volume.id %>
-  <%= link_to 'picture', volumes_path(id: volume.id) %><br>
 
-<% end %>
+<div class= "book-chapter">
+  <div><%= link_to "new", new_volume_path(id: @book.id) %></div>
+  <div><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
+  <% @volumes.each.with_index(1) do |volume, i| %>
+    <table class= "table-bordered" >
+      <tr>
+        <th rowspan="2"class= "chapter-index"><%= i %></th>
+        <th class= "chapter-title" >
+          <%= link_to volume.title, '#', class: "chapter-title" %>
+          <% if current_user.id == @book.id %>
+            <%= link_to "edit", edit_volume_path(id: volume.id) %>
+            <%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %>
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+        <td><%= volume.content %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>

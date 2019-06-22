@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_19_012411) do
+ActiveRecord::Schema.define(version: 2019_06_22_171900) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,27 @@ ActiveRecord::Schema.define(version: 2019_06_19_012411) do
     t.integer "user_id"
     t.string "picture"
     t.index ["user_id"], name: "index_books_on_user_id"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.string "comment"
+    t.integer "user_id"
+    t.integer "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id", "user_id"], name: "index_evaluations_on_book_id_and_user_id", unique: true
+    t.index ["book_id"], name: "index_evaluations_on_book_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_favorites_on_book_id"
+    t.index ["user_id", "book_id"], name: "index_favorites_on_user_id_and_book_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "pictures", force: :cascade do |t|

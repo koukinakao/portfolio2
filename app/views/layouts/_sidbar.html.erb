@@ -1,0 +1,10 @@
+<div class= "user_sidber">
+  name: <%= link_to current_user.name, edit_user_path(current_user) %><br>
+  books-Number-of-turns: <%= link_to current_user.books.count, books_posts_path %><br>
+  favorite: <%= current_user.favorite_books.count %>
+  <br>
+</div>
+
+<div class= "history_sidbar">
+  高評価Top10
+</div>

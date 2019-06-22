@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_many :books, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_books, through: :favorites, source: :book
+  has_many :evaluations, dependent: :destroy
+  has_many :evaluation_books, through: :evaluations, source: :book
   attr_accessor :remember_token
   has_secure_password
   

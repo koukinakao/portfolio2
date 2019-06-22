@@ -2,10 +2,11 @@ class BooksController < ApplicationController
   before_action :logged_in_user
   
   def posts_index
-    @books = Book.all
+    @books = Book.where(user_id: current_user.id)
   end
 
   def viewer_index
+    @books = Book.all
   end
 
   def new
