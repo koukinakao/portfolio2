@@ -17,15 +17,18 @@
 
 
 <div class= "book-chapter">
+  <div>
   <div><%= link_to "new", new_volume_path(id: @book.id) %></div>
   <div><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
+  </div>
   <% @volumes.each.with_index(1) do |volume, i| %>
     <table class= "table-bordered" >
       <tr>
         <th rowspan="2"class= "chapter-index"><%= i %></th>
         <th class= "chapter-title" >
           <%= link_to volume.title, '#', class: "chapter-title" %>
-          <% if current_user.id == @book.id %>
+          <%= link_to "position", picture_show_path(id: volume.id) %>
+          <% if current_user.id == @book.user_id %>
             <%= link_to "edit", edit_volume_path(id: volume.id) %>
             <%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %>
           <% end %>

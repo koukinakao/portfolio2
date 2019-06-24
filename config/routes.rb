@@ -7,10 +7,13 @@ Rails.application.routes.draw do
   get 'books/viewer', to: 'books#viewer_index'
   post 'favorites', to: 'favorites#create'
   delete 'unfavorites', to: 'favorites#destroy'
+  get 'picture_show', to: 'volumes#picture_show'
   resources :users
   resources :books
   resources :volumes do
-    resources :pictures
+      member do
+        get :change_position
+    end
   end
   resources :evaluations
 end

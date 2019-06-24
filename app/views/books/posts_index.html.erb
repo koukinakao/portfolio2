@@ -9,7 +9,7 @@
       <h1 class= "book-description-title">Title: <%= book.title %></h1>
       <p>
         <%= link_to 'edit', edit_book_path(book) %>
-        <%= link_to 'destroy', book, method: :delete, data: { confirmtion: "削除してもいいですか？" } %>
+        <%= link_to 'destroy', book, method: :delete, data: { confirm: "削除してもいいですか？" } %>
         <%= link_to 'volume-show', volume_path(book) %>
       </p>
       <p>Created date: <%= book.created_at %></p>

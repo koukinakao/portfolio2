@@ -9,7 +9,26 @@ class VolumesController < ApplicationController
     @volumes = @book.volumes
     @favorite_count = @book.favorites.count
   end
-
+  
+  def picture_show
+    @pictures = Picture.where(volume_id: params[:id]).includes(:volume).order(:position)
+  end
+  
+  def change_position
+    case params[:move]
+    when 'up'
+      @picture = Picture.find(params[:id])
+      @picture.move_higher
+      @target = @picture.lower_item
+    when 'down'
+      @picture = Picture.find(params[:id])
+      @picture.move_lower
+      @target = @picture.higher_item
+    else
+      return head :ok
+    end
+  end
+  
   def new
     @volume = Book.find_by(id: params[:id]).volumes.new
         1.times { @volume.pictures.build }
@@ -20,7 +39,7 @@ class VolumesController < ApplicationController
     @volume = @book.volumes.build(volume_params)
     if @volume.save
       picture_params[:pictures_attributes]["0"][:picture].map do |d|
-        picture = @volume.pictures.create!(picture: d)
+        @volume.pictures.create!(picture: d)
       end
       redirect_to volume_path(id: @volume.book_id)
     else

@@ -1,6 +1,6 @@
 class Volume < ApplicationRecord
   belongs_to :book
-  has_many :pictures
+  has_many :pictures, -> { order(position: :asc) }
   accepts_nested_attributes_for :pictures
   validate  :picture_size
   
