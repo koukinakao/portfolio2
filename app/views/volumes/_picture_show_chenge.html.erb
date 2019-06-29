@@ -1,0 +1,5 @@
+<div class="picture">
+  <%= link_to "←", picture_show_chenge_volume_path(id: @picture.volume_id, move: "up", position: @picture.position), remote: true %>
+  <%= image_tag @picture.picture.url %>
+  <%= link_to "→", picture_show_chenge_volume_path(id: @picture.volume_id, move: "down", position: @picture.position), remote: true %>
+</div>

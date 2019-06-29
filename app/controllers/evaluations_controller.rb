@@ -25,6 +25,7 @@ class EvaluationsController < ApplicationController
   end
   
   def update
+    debugger
     @book = Book.find_by(id: evaluation_params[:book_id])
     @evaluation = current_user.evaluations.find_by(book_id: @book.id)
     if @evaluation.update(evaluation_params)
@@ -44,7 +45,7 @@ class EvaluationsController < ApplicationController
   private
   
   def evaluation_params
-    params.require(:evaluation).permit(:comment, :book_id)
+    params.require(:evaluation).permit(:comment, :book_id, :star)
   end
 
 end

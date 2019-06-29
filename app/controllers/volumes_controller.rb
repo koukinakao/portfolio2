@@ -10,8 +10,35 @@ class VolumesController < ApplicationController
     @favorite_count = @book.favorites.count
   end
   
-  def picture_show
+  def picture_position_show
     @pictures = Picture.where(volume_id: params[:id]).includes(:volume).order(:position)
+  end
+  
+  def picture_show
+    @picture = Picture.where(volume_id: params[:id]).includes(:volume).order(:position).first
+  end
+  
+  def picture_show_chenge
+    case params[:move]
+    when 'up'
+      @position = params[:position].to_i + 1
+      @picture = Picture.find_by(volume_id: params[:id], position: @position)
+      if @picture.nil?
+        @picture = Picture.find_by(volume_id: params[:id], position: params[:position])
+      end
+    when 'down'
+      @position = params[:position].to_i - 1
+      @picture = Picture.find_by(volume_id: params[:id], position: @position)
+      if @picture.nil?
+        @picture = Picture.find_by(volume_id: params[:id], position: params[:position])
+      end
+    else
+      return head :ok
+    end
+  end
+  
+  def picture
+    @picture = Picture.where(volume_id: params[:id]).order(:position).first
   end
   
   def change_position
