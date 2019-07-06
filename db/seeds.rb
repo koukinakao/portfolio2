@@ -12,9 +12,19 @@ User.create!(name:  "admin User",
              password_confirmation: "foobar",
              admin: true)
 
+User.create!(name:  "工藤わらび(創作漫画)@warabikudo",
+             email: "twitter1@gmail.com",
+             password:              "foobar",
+             password_confirmation: "foobar")
+
+User.create!(name:  "竹村洋平@takemura4hey",
+             email: "twitter2@gmail.com",
+             password:              "foobar",
+             password_confirmation: "foobar")
+
 3.times do |n|
   name  = Faker::Name.name
-  email = "test-#{n+1}@railstutorial.org"
+  email = "test-#{n+1}@railstutorial.com"
   password = "password"
   User.create!(name:  name,
                email: email,
@@ -26,12 +36,13 @@ users = User.order(:created_at)
 5.times do
   title = Faker::Book.title
   content = Faker::Lorem.sentence(5)
-  users.each { |user| user.books.create!(content: content, title: title) }
+  users.each { |user| user.books.create!(content: content, title: title, picture: open("#{Rails.root}/db/fixtures/f19d591e40ae09ccbb5c64110cdcf92a.jpg")) }
 end
 
 books = Book.order(:created_at)
-5.times do
-  title = Faker::Book.title
-  content = Faker::Lorem.sentence(5)
-  books.each { |book| book.volumes.create!(content: content, title: title) }
+3.times do |n|
+  books.each { |book| book.evaluations.create!(
+               comment: "It was very good. We will support you from now on, so please do your best.",
+               user_id: n+1,
+               star: rand(1..5)) }
 end

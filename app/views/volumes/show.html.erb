@@ -40,37 +40,40 @@
 <div class= "book-chapter">
   <div class= "volume-new-bottom">
     <div class= "border-css">
-      <% if current_user.nil? || current_user.id == @book.user_id %>
-        <div class= "button volume_new_css"><%= link_to "new", new_volume_path(id: @book.id) %></div>
+      <% if current_user.nil? %>
+        <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
       <% else %>
-        <% if @evaluation.nil? %>
-          <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
-          <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+        <% if current_user.id == @book.user_id %>
+          <div class= "button volume_new_css"><%= link_to "new", new_volume_path(id: @book.id) %></div>
         <% else %>
-          name:<%= current_user.name %>
-          <div class= "button"><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
-          <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
-          <div>
-            star:<div class="field" id="star"></div><%= @evaluation.star %>
-          </div>
-          <script>
-            $(window).ready(function(){
-              $('#star').empty();
-              $('#star').raty({
-                size    : 36,
-                starOff :  '<%= asset_path('star-off.png') %>',
-                starOn  : '<%= asset_path('star-on.png') %>', 
-                readOnly: true,
-                score   :<%= @evaluation.star %>,
+          <% if @evaluation.nil? %>
+            <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
+            <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+          <% else %>
+            name:<%= current_user.name %>
+            <div class= "button"><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
+            <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+            <div>
+              star:<div class="field" id="star"></div><%= @evaluation.star %>
+            </div>
+            <script>
+              $(window).ready(function(){
+                $('#star').empty();
+                $('#star').raty({
+                  size    : 36,
+                  starOff :  '<%= asset_path('star-off.png') %>',
+                  starOn  : '<%= asset_path('star-on.png') %>', 
+                  readOnly: true,
+                  score   :<%= @evaluation.star %>,
+                });
               });
-            });
-          </script>
-          
-          <div>
-            comment:&emsp;<%= @evaluation.comment %>
-          </div>
+            </script>
+            
+            <div>
+              comment:&emsp;<%= @evaluation.comment %>
+            </div>
+          <% end %>
         <% end %>
-          
       <% end %>
     </div>
   </div>
@@ -81,7 +84,7 @@
         <th rowspan="2" class= "chapter-index"><%= i %></th>
         <th class= "chapter-tt h-d-width" >
           <%= link_to volume.title, pictures_show_path(id: volume.id), class: "chapter-title button-t-c" %>
-          <% if current_user.nil? || current_user.id == @book.user_id %>
+          <% if !current_user.nil? && current_user.id == @book.user_id %>
             <div class= "button"><%= link_to "position", picture_show_path(id: volume.id) %></div>
             <div class= "button"><%= link_to "edit", edit_volume_path(id: volume.id) %></div>
             <div class= "button"><%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %></div>

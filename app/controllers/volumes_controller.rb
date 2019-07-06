@@ -10,8 +10,9 @@ class VolumesController < ApplicationController
     @book = Book.find_by(id: params[:id])
     @volumes = @book.volumes
     @favorite_count = @book.favorites.count
-    @evaluation = current_user.evaluations.find_by(book_id: @book.id)
-    
+    unless current_user.nil?
+      @evaluation = current_user.evaluations.find_by(book_id: @book.id)
+    end
   end
   
   def picture_position_show

@@ -38,7 +38,9 @@
 
 <div class= "book-details border-css-book evaluation-user">
   <div>
-    name:<%= current_user.name %>
+    <% unless current_user.nil? %>
+      name:<%= current_user.name %>
+    <% end %>
     <% if @user_evaluation.nil? %>
       <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
     <% else %>
@@ -46,25 +48,27 @@
     <% end %>
   </div>
   
-  <div>
-    star:<div class="field" id="star"></div><%= @user_evaluation.star %>
-  </div>
-    <script>
-      $(window).ready(function(){
-        $('#star').empty();
-        $('#star').raty({
-          size    : 36,
-          starOff :  '<%= asset_path('star-off.png') %>',
-          starOn  : '<%= asset_path('star-on.png') %>', 
-          readOnly: true,
-          score   :<%= @user_evaluation.star %>,
+  <% unless current_user.nil? %>
+    <div>
+      star:<div class="field" id="star"></div><%= @user_evaluation.star %>
+    </div>
+      <script>
+        $(window).ready(function(){
+          $('#star').empty();
+          $('#star').raty({
+            size    : 36,
+            starOff :  '<%= asset_path('star-off.png') %>',
+            starOn  : '<%= asset_path('star-on.png') %>', 
+            readOnly: true,
+            score   :<%= @user_evaluation.star %>,
+          });
         });
-      });
-    </script>
+      </script>
           
-  <div>
-    comment:&emsp;<%= @user_evaluation.comment %>
-  </div>
+    <div>
+      comment:&emsp;<%= @user_evaluation.comment %>
+    </div>
+  <% end %>
 </div>
 
 

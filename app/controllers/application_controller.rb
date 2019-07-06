@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   end
   
   def evaluations_number
-    @evaluations = Evaluation.order(star: "DESC").group(:book_id).average(:star)
+    @evaluations = Evaluation.group(:book_id).average(:star).sort_by{ | k, v | v }.reverse
     @limit = 0
     @evaluations.each{|key, value| 
     @limit += 1
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     else
       @evalutop += [@book] 
     end
-      if @limit > 10 then
+      if @limit > 9 then
         break
       end
     }

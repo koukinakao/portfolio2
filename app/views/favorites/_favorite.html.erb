@@ -12,6 +12,8 @@
     &emsp;お気に入り登録数<%= @book.favorites.count %>
   </div>
 <% end %>
-<% if current_user.id == @book.user_id %>
-  <div class= "button"><%= link_to "edit", edit_book_path(@book) %></div>
+<% unless current_user.nil? %>
+  <% if current_user.id == @book.user_id %>
+    <div class= "button"><%= link_to "edit", edit_book_path(@book) %></div>
+  <% end %>
 <% end %>
