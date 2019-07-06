@@ -4,7 +4,7 @@
   <div>
      <%= f.label :star %>
     <%= f.hidden_field :star %>
-    <div class="field" id="star-edit-<%= @evaluation.id %>"></div>
+    <div class="field" id="star"></div>
     <%= @evaluation.star %>
   </div>
   
@@ -18,11 +18,9 @@
 <% end %>
 
 <script>
-
-
 $(window).ready(function(){
-$('#star-edit-<%= @evaluation.id %>').empty();
-  $('#star-edit-<%= @evaluation.id %>').raty({
+  $('#star').empty();
+  $('#star').raty({
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>', 
