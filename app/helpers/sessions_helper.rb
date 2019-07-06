@@ -19,8 +19,8 @@ module SessionsHelper
     elsif (user_id = cookies.signed[:user_id])
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
-　    　#ログインする
-        log_in user
+　   　  #ログインする
+         log_in user
         @current_user = user
       end
     end
@@ -29,6 +29,20 @@ module SessionsHelper
   # ユーザーがログインしていればtrue、その他ならfalseを返す
   def logged_in?
     !current_user.nil?
+  end
+  
+  # 正しいユーザーかどうか確認
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user || current_user.admin?
+  end
+  
+  # 管理者かどうか確認
+  def admin_user
+    unless current_user.admin?
+      flash[:danger] = 'Do not have the authority'
+      redirect_to(root_url) 
+    end
   end
   
   # 永続的セッションを破棄する

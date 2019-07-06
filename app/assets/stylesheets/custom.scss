@@ -1,38 +1,168 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  background-image: url(768.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 60px;
+  color: #000;
+}
 
+.page-title {
+  text-align: center;
+}
 
-.book-bocks {
+ul {
+  padding: 0;
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.h-d-width {
+  width: 100%;
+}
+
+.table-user {
+  width: 100%;
+  verical-align: middle;
+  text-align: center;
+}
+
+.th-user {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+  font-size: 20px;
+}
+
+.table-bordered > tbody > tr > .td-center {
+  line-height: 300px;
+}
+
+.login-m {
+  margin-left: 10px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.border-css {
+  background-color: #fff;
   border: 1px solid #000;
+  border-radius: 10px;
+  margin-bottom: 100px;
+}
+
+.border-css-book {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.margin-book {
+  margin-bottom: 100px;
 }
 
 .book-title {
   font-size: 18px;
+  margin-top: 10px;
 }
 
 .book-margin {
   height: 347px;
-
   margin-top: 10px;
   margin-bottom: 5px;
   text-align: center;
 }
 
+.navbar-inverse {
+  background-color: #375ac3;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #d8d5d5;
+  &:hover {
+    background-color: #6c85ce;
+  }
+}
+
+.navbar-inverse .navbar-nav > .open > a:focus,
+.navbar-inverse .navbar-nav > .open > a:visited {
+  background-color: #6c85ce;
+}
+
+.dropdown-menu-color {
+  background-color: #375ac3;
+  border-color: #090909;
+}
+
+.dropdown-menu > li > a {
+  color: #d8d5d5;
+}
+
 .user_sidber {
   margin-bottom: 20px;
-  border: 1px solid #000;
+  padding: 10px;
 }
 
-.history_sidbar {
-  border: 1px solid #000;
+.sid-hr {
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
+.sid-cont {
+  margin: 10px;
+  overflow: hidden;
+}
+
+.evaluations-css {
+  padding-left: 10px;
+}
 
 
 .book-details {
   overflow: hidden;
- border: 1px solid #000; 
 }
 
 .book-image {
@@ -44,8 +174,14 @@
   overflow: hidden;
 }
 
-.book-description-title {
-    
+.button-t-c {
+  color: #000;
+  background-color: #c8d9f38a;
+  padding: 5px;
+  &:hover {
+    border-bottom: solid 2px #000;
+    text-decoration: none; 
+  }
 }
 
 .book-chapter {
@@ -54,6 +190,10 @@
 
 .chapter-title {
   font-size: 20px;
+}
+
+.chapter-tt {
+  padding: 5px;
 }
 
 .chapter-index {
@@ -66,16 +206,20 @@
   padding-left: 5px;
 }
 
+.like-link > a:hover {
+  text-decoration: none;
+}
+
 .favorite {
   display: inline-block;
   max-width: 180px;
   text-align: left;
   border: 2px solid #00ceff;
-  font-size: 16px;
+  font-size: 13px;
   color: #00ceff;
   text-decoration: none;
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 8px 8px;
   border-radius: 4px;
   transition: .4s;
   background-color: #00ceff;
@@ -93,14 +237,157 @@
   max-width: 180px;
   text-align: left;
   border: 2px solid #00ceff;
-  font-size: 16px;
+  font-size: 13px;
   color: #00ceff;
   text-decoration: none;
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 8px 8px;
   border-radius: 4px;
   transition: .4s;
   &:hover {
     background-color: #dedddd;
   }
+}
+
+.button {
+  display: inline-block;
+  font-size: 13px;
+  padding: 5px 5px;
+  background-color: #0544ff7a;
+  border-radius: 10px;
+  & > a {
+    color: #000;
+  }
+}
+
+.button:hover {
+  background-color: #0032c7;
+  & > a {
+    color: #fff;
+  }
+}
+
+.border-k-m {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.table-bordered {
+  background-color: #fff;
+  margin-bottom: 100px;
+}
+
+.volume-iamge {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #00ceff;
+}
+
+.volume-iamge-prev {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.image-vo {
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.image-vo-con {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.image {
+  margin-top: 10px;
+}
+
+.body-picuture-show {
+  text-align: center;
+  padding: 0;
+  background-image: none;
+  background-color: #000;
+}
+
+.image-picuture-show {
+  max-width: 100%;
+  max-height: 100%;
+  height: 100vh;
+}
+
+.chenge-picuture-show-left {
+  padding: 0px 20px;
+  font-size: 36px;
+}
+
+.chenge-picuture-show-right {
+  padding: 0px 20px;
+  font-size: 36px;
+}
+
+.submit-button {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.picture-ab {
+  width: 210px; 
+  height: 297px;
+  text-align: center;
+  padding-top: 50%;
+  background-color: #0000001c;
+}
+
+.book-page-title {
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.field {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.evaluation-user {
+  margin-bottom: 20px;
+}
+
+.volume_new_css {
+  margin: 20px 0;
+}
+
+
+@media screen and (max-width:639px) {
+/*スマホ用のcssを記述*/
+
+  .picture {
+    position: relative;
+  }
+  .chenge-picuture-show-left {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    padding: 0px 20px;
+    font-size: 36px;
+  }
+  
+  .chenge-picuture-show-right {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    padding: 0px 20px;
+    font-size: 36px;
+  }
+}
+   
+@media only screen and (min-width:640px) and (max-width:1023px) {
+/*tablet用のcssを記述*/
+}
+  
+@media screen and (min-width:1024px) {
+/*pc用のcssを記述*/
 }

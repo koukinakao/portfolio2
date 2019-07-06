@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  layout 'users'
+  
   def new
   end
   
@@ -10,7 +12,8 @@ class SessionsController < ApplicationController
       log_in user
       #[remember me] チェックボックスの送信結果を処理する
       params[:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to root_path
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render :new

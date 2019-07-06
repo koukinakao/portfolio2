@@ -3,7 +3,9 @@ class Volume < ApplicationRecord
   has_many :pictures, -> { order(position: :asc) }
   accepts_nested_attributes_for :pictures
   validate  :picture_size
-  
+  validates :title, presence: true, length: { maximum: 50 }
+  validates :content, length: { maximum: 150 }
+
   private
 
     # アップロードされた画像のサイズをバリデーションする

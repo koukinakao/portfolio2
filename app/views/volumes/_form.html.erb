@@ -6,22 +6,33 @@
   <%= f.text_field :title, class: "form-control" %>
   
   <%= f.label :content %>
-  <%= f.text_field :content, class: "form-control" %>
+  <%= f.text_area :content, size: "20x10", maxlength: "350", class: "form-control" %>
   <br>
+  
   <%= f.fields_for :pictures do |pi| %>
-  <%= f.hidden_field :volume_id, :value => @volume.id %>
-  <%= pi.hidden_field :id %>
-    <br><% unless pi.object.picture.blank? %>
-      <%= image_tag pi.object.picture.url %>
-     <%= pi.check_box :remove_picture %>画像を削除する
-    <% end %>
-    <%= pi.file_field :picture, class: "haha", multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
+    <div class= "volume-iamge">
+      <%= f.hidden_field :volume_id, :value => @volume.id %>
+      <%= pi.hidden_field :id %><br>
+      <div class= "image-vo"><%= image_tag pi.object.picture.url unless pi.object.picture.blank? %></div>
+      <div class= "image-vo-con">
+        <% if pi.object.picture.blank? %>
+          <br><br><div class= "image-new-wo">画像を追加する</div>
+        <% end %>
+        <%= pi.file_field :picture, class: "image", multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
+        <% unless pi.object.picture.blank? %>
+          <%= pi.check_box :remove_picture %>画像を削除する<br>
+        <% end %>
+      </div>
+    </div>
   <% end %>
+  <div class= "volume-iamge-prev">
+    <div id="picture_prev", class= "image-vo" ></div><br>
+  </div>
   
-  <div id="picture_prev" ></div><br>
+  <div class= "submit-button">
+    <%= f.submit "作成", class: "btn btn-primary" %>
+  </div>
   
-  <%= f.submit "送信", class: "btn btn-primary" %>
-
 <% end %>
 
 <script type="text/javascript">
@@ -36,10 +47,10 @@
 
      if(window.File && window.FileList && window.FileReader) {
        console.log("動いた1")
-       var result = $('.haha').last().attr({'id': 'text', 'class': 'inputnew'});
-       $('.haha').removeAttr('multiple');
+       var result = $('.image').last().attr({'id': 'text', 'class': 'inputnew'});
+       $('.image').removeAttr('multiple');
         $(document).on('change', 'input[type=file]', function (e) {
-          var d =$(this)
+          var d = $(this).parent().prev().children('img');
           console.log(d)
             var files = e.target.files ,
             filesLength = files.length ;
@@ -48,7 +59,7 @@
                 var fileReader = new FileReader();
                 fileReader.onload = (function(e) {
                     var file = e.target;
-                  $(d).prev().prev().prev().attr({'src': e.target.result, width: 200, height: 297});
+                  $(d).attr({'src': e.target.result, width: 200, height: 297});
                });
                fileReader.readAsDataURL(f);
            }
@@ -64,7 +75,6 @@
                     var file = e.target;
                     $('#picture_prev')
                       .append("<br>")
-                      .append("新規画像")
                       .append("<br>")
                       .append($("<img/>").attr({'src': e.target.result, width: 200, height: 297}))
                });

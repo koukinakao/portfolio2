@@ -1,19 +1,26 @@
-<h1>Books#posts_index</h1>
-<%= link_to 'new', new_book_path %><br><br>
-<% @books.each do |book| %>
-  <div class= "book-details">
-    <div class="book-image">
-      <%= image_tag book.picture.url %>
-    </div>
-    <div class="book-description">
-      <h1 class= "book-description-title">Title: <%= book.title %></h1>
-      <p>
-        <%= link_to 'edit', edit_book_path(book) %>
-        <%= link_to 'destroy', book, method: :delete, data: { confirm: "削除してもいいですか？" } %>
-        <%= link_to 'volume-show', volume_path(book) %>
-      </p>
-      <p>Created date: <%= book.created_at %></p>
-      <p>content: <%= book.content %></p>
-    </div>
+<div class= "margin-book">
+  <div class= "book-details border-css-book book-page-title">
+    <h1>Books#posts_index</h1>
+    <% if @user.id == current_user.id %>
+      <div class= "button"><%= link_to 'new', new_book_path %></div><br>
+    <% end %>
   </div>
-<% end %>
+  <% @books.each do |book| %>
+    <div class= "book-details border-css-book">
+      <div class="book-image">
+        <%= image_tag book.picture.url unless book.picture.nil?%>
+      </div>
+      <div class="book-description">
+        <h1>Title: <%= link_to book.title, volume_path(book), class: "button-t-c" %></h1>
+        <% if @books.first.user_id == current_user.id %>
+          <div>
+            <div class= "button"><%= link_to 'edit', edit_book_path(book) %></div>
+            <div class= "button"><%= link_to 'destroy', book, method: :delete, data: { confirm: "削除してもいいですか？" } %></div>
+          </div>
+        <% end %>
+        <p>Created date: <%= book.created_at %></p>
+        <p>content: <%= book.content %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

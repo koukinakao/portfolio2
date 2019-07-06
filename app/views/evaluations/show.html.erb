@@ -1,2 +1,98 @@
 <h1>Evaluations#show</h1>
-<p>Find me in app/views/evaluations/show.html.erb</p>
+<div class= "book-details border-css">
+  <div class="book-image">
+    <% if @book.picture.blank? %>
+      <div class = "picture-ab">画像がありません</div>
+    <% else %>
+      <%= image_tag @book.picture.url %>
+    <% end %>
+  </div>
+  <div class="book-description">
+    <h1>Title: <%= @book.title %></h1>
+    <div>
+      star:<div class="field" id="star-raty-book"></div><%= evalu_average(@book) %>
+    </div>
+    <script>
+      $(window).ready(function(){
+        $('#star-raty-book').empty();
+        $('#star-raty-book').raty({
+          size    : 36,
+          starOff :  '<%= asset_path('star-off.png') %>',
+          starOn  : '<%= asset_path('star-on.png') %>', 
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score   :<%= evalu_average(@book) %>,
+        });
+      });
+    </script>
+    <%= render 'favorites/favorite' %><br>
+    <p>Author: <%= link_to user_name_chenge(@book), books_posts_path(id: @book.user_id), class: "button-t-c" %></p>
+    <p>
+      Created date: <%= @book.created_at %>&emsp;&emsp;
+      Updated date: <%= @book.updated_at %>
+    </p>
+    <p>content:&emsp;<%= @book.content %></p>
+  </div>
+</div>
+
+<div class= "book-details border-css-book evaluation-user">
+  <div>
+    name:<%= current_user.name %>
+    <% if @user_evaluation.nil? %>
+      <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
+    <% else %>
+      <div class= "button"><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
+    <% end %>
+  </div>
+  
+  <div>
+    star:<div class="field" id="star"></div><%= @user_evaluation.star %>
+  </div>
+    <script>
+      $(window).ready(function(){
+        $('#star').empty();
+        $('#star').raty({
+          size    : 36,
+          starOff :  '<%= asset_path('star-off.png') %>',
+          starOn  : '<%= asset_path('star-on.png') %>', 
+          readOnly: true,
+          score   :<%= @user_evaluation.star %>,
+        });
+      });
+    </script>
+          
+  <div>
+    comment:&emsp;<%= @user_evaluation.comment %>
+  </div>
+</div>
+
+
+<% @evaluations.each do |evaluation| %>
+  <div class= "book-details border-css-book">
+    <div>
+      name:<%= evaluation.user_id %>
+    </div>
+    
+    <div>
+      star:<div class="field" id="star-rate-<%= evaluation.id %>"></div><%= evaluation.star %>
+    </div>
+      <script>
+        $(window).ready(function(){
+          $('#star-rate-<%= evaluation.id %>').empty();
+          $('#star-rate-<%= evaluation.id %>').raty({
+            size    : 36,
+            starOff :  '<%= asset_path('star-off.png') %>',
+            starOn  : '<%= asset_path('star-on.png') %>', 
+            readOnly: true,
+            score: <%= evaluation.star %>,
+          });
+        });
+      </script>
+          
+    <div>
+      commentv:&emsp;<%= evaluation.comment %>
+    </div>
+  </div>
+<% end %>
+  

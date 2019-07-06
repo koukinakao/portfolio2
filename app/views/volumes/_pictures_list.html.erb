@@ -1,13 +1,9 @@
-<div class= "book-details" id= "picture_<%= picture.position %>">
-  <div class= "col-md-11">
-  <div class="book-image">
-    <%= image_tag picture.picture.url %>
-  </div>
-  <div class="book-description">
-    <%= picture.position %>
-  </div>
-</div>
-<div class= "col-md-1">
-  <%= link_to '▲', change_position_volume_path(id: picture, move: 'up'), remote: true unless picture.first? %>
-  <%= link_to '▼', change_position_volume_path(id: picture, move: 'down'), remote: true unless picture.last? %>
-</div>
+
+<tr class= "picture_<%= picture.position %>">
+  <td class= "td-center"><%= picture.position %></td>
+  <td class= "text-center"><%= image_tag picture.picture.url %></td>
+  <td class= "td-center">
+    <%= link_to '▲', change_position_volume_path(id: picture, move: 'up'), remote: true unless picture.first? %>
+    <%= link_to '▼', change_position_volume_path(id: picture, move: 'down'), remote: true unless picture.last? %>
+  </td>
+</tr>

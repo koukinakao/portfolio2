@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show]
+  before_action :logged_in_user, only: [:edit, :update]
+  before_action :current_user
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :admin_user,     only: [:index]
   
   def index
     @users = User.all
@@ -17,6 +20,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       log_in @user
+      flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
       render :new
@@ -30,6 +34,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:success] = "user updated"
       redirect_to @user
     else
       render :edit
@@ -38,12 +43,14 @@ class UsersController < ApplicationController
   
   def destroy
     User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
     redirect_to users_path
   end
   
   private
   
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+  
 end

@@ -1,25 +1,4 @@
-<h1>Evaluations#new</h1>
-<%= form_with(model: @evaluation, local: true ) do |f| %>
-
-  <%= f.hidden_field :book_id, :value => @book.id %>
-  
-  <div class="field" id="star">
-            <%= f.label :star %>
-            <%= f.hidden_field :star, id: :review_star %>
-          </div>
-  <%= f.label :comment %>
-  <%= f.text_field :comment, class: "form-control" %>
-  <div id='star-rating'></div>
-  
-  <%= f.submit "送信", class: "btn btn-primary" %>
-
-<% end %>
-
-<script>
-$('#star').raty({
-  size     : 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  scoreName: 'evaluation[star]' 
-});
-</script>
+<div class= "border-k-m">
+  <h1 class= "page-title">Evaluations#new</h1>
+  <%= render 'form' %>
+</div>

@@ -1,0 +1,33 @@
+<%= form_with(model: @evaluation, local: true ) do |f| %>
+
+  <%= f.hidden_field :book_id, :value => @book.id %>
+  <div>
+     <%= f.label :star %>
+    <%= f.hidden_field :star %>
+    <div class="field" id="star-edit-<%= @evaluation.id %>"></div>
+    <%= @evaluation.star %>
+  </div>
+  
+  <%= f.label :comment %>
+  <%= f.text_area :comment, size: "20x10", maxlength: "350", class: "form-control" %>
+
+  <div class= "submit-button">
+    <%= f.submit "作成", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
+
+<script>
+
+
+$(window).ready(function(){
+$('#star-edit-<%= @evaluation.id %>').empty();
+  $('#star-edit-<%= @evaluation.id %>').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>', 
+    scoreName: 'evaluation[star]',
+    score: <%= @evaluation.star %>
+  });
+});
+</script>

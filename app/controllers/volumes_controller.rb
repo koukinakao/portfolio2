@@ -1,4 +1,6 @@
 class VolumesController < ApplicationController
+  before_action :logged_in_user, only: [:picture_position_show, :picture_show_chenge, :change_position, :new, :create, :edit, :update, :destroy]
+  before_action :evaluations_number
   
   def index
     @pictures = Volume.find_by(id: params[:id]).pictures
@@ -8,6 +10,8 @@ class VolumesController < ApplicationController
     @book = Book.find_by(id: params[:id])
     @volumes = @book.volumes
     @favorite_count = @book.favorites.count
+    @evaluation = current_user.evaluations.find_by(book_id: @book.id)
+    
   end
   
   def picture_position_show
@@ -16,6 +20,12 @@ class VolumesController < ApplicationController
   
   def picture_show
     @picture = Picture.where(volume_id: params[:id]).includes(:volume).order(:position).first
+    if @picture.nil?
+      @book = Volume.find_by(id: params[:id]).book
+      redirect_to volume_path(@book.id)
+    else
+      render :layout => 'picuture-prevu'
+    end
   end
   
   def picture_show_chenge
@@ -64,12 +74,17 @@ class VolumesController < ApplicationController
   def create
     @book = Book.find_by(id: params[:volume][:id])
     @volume = @book.volumes.build(volume_params)
-    if @volume.save
+    if @volume.save && !picture_params[:pictures_attributes]["0"][:picture].nil?
       picture_params[:pictures_attributes]["0"][:picture].map do |d|
         @volume.pictures.create!(picture: d)
       end
+      flash[:success] = "volume created"
       redirect_to volume_path(id: @volume.book_id)
     else
+      if picture_params[:pictures_attributes]["0"][:picture].nil?
+        flash.now[:danger] = "Picture can't be blank"
+      end
+      1.times { @volume.pictures.build }
       render :new
     end
   end
@@ -100,8 +115,10 @@ class VolumesController < ApplicationController
           end
         end
       end
+      flash[:success] = "volume updated"
       redirect_to volume_path(id: @volume.book_id)
     else
+      1.times { @volume.pictures.build }
       render :edit
     end
   end
@@ -110,6 +127,7 @@ class VolumesController < ApplicationController
     @volume = Volume.find(params[:id])
     @book = Book.find_by(id: @volume.book_id)
     @volume.destroy
+    flash[:success] = "volume deleted"
     redirect_to volume_path(id: @book.id)
   end
   

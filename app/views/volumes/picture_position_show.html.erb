@@ -1,7 +1,10 @@
-<% @pictures.each do |picture| %>
-  
-
-<%= render 'pictures_list', picture: picture %>
-</div>
-
-<% end %>
+<table class= "table table-bordered">
+  <tr>
+    <th class= "text-center">順番</th>
+    <th class= "text-center">画像</th>
+    <th class= "text-center">並び替え</th>
+  </tr>
+  <% @pictures.each do |picture| %>
+    <%= render 'pictures_list', picture: picture %>
+  <% end %>
+</table>

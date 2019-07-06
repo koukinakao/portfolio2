@@ -1,14 +1,35 @@
 <h1>Volumes#show</h1>
-<div class= "book-details">
+<div class= "book-details border-css">
   <div class="book-image">
-    <%= image_tag @book.picture.url %>
+    <% if @book.picture.blank? %>
+      <div class = "picture-ab">画像がありません</div>
+    <% else %>
+      <%= image_tag @book.picture.url %>
+    <% end %>
   </div>
   <div class="book-description">
-    <h1 class= "book-description-title">Title: <%= @book.title %></h1>
-    <%= render 'favorites/favorite' %>
-    <p>Author: <%= user_name_chenge(@book) %></p>
+    <h1>Title: <%= @book.title %></h1>
+    <div>
+      star:<div class="field" id="star-raty-book"></div><%= evalu_average(@book) %>
+    </div>
+    <script>
+      $(window).ready(function(){
+        $('#star-raty-book').empty();
+        $('#star-raty-book').raty({
+          size    : 36,
+          starOff :  '<%= asset_path('star-off.png') %>',
+          starOn  : '<%= asset_path('star-on.png') %>', 
+          starHalf: '<%= asset_path('star-half.png') %>',
+          half: true,
+          readOnly: true,
+          score   :<%= evalu_average(@book) %>,
+        });
+      });
+    </script>
+    <%= render 'favorites/favorite' %><br>
+    <p>Author: <%= link_to user_name_chenge(@book), books_posts_path(id: @book.user_id), class: "button-t-c" %></p>
     <p>
-      Created date: <%= @book.created_at %>
+      Created date: <%= @book.created_at %>&emsp;&emsp;
       Updated date: <%= @book.updated_at %>
     </p>
     <p>content: <%= @book.content %></p>
@@ -17,28 +38,59 @@
 
 
 <div class= "book-chapter">
-  <div>
-  <div><%= link_to "new", new_volume_path(id: @book.id) %></div>
-  <div><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
-  <div><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
-
+  <div class= "volume-new-bottom">
+    <div class= "border-css">
+      <% if current_user.nil? || current_user.id == @book.user_id %>
+        <div class= "button volume_new_css"><%= link_to "new", new_volume_path(id: @book.id) %></div>
+      <% else %>
+        <% if @evaluation.nil? %>
+          <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
+          <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+        <% else %>
+          name:<%= current_user.name %>
+          <div class= "button"><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
+          <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+          <div>
+            star:<div class="field" id="star"></div><%= @evaluation.star %>
+          </div>
+          <script>
+            $(window).ready(function(){
+              $('#star').empty();
+              $('#star').raty({
+                size    : 36,
+                starOff :  '<%= asset_path('star-off.png') %>',
+                starOn  : '<%= asset_path('star-on.png') %>', 
+                readOnly: true,
+                score   :<%= @evaluation.star %>,
+              });
+            });
+          </script>
+          
+          <div>
+            comment:&emsp;<%= @evaluation.comment %>
+          </div>
+        <% end %>
+          
+      <% end %>
+    </div>
   </div>
-  <% @volumes.each.with_index(1) do |volume, i| %>
-    <table class= "table-bordered" >
+  
+  <table class= "table-bordered" >
+    <% @volumes.each.with_index(1) do |volume, i| %>
       <tr>
-        <th rowspan="2"class= "chapter-index"><%= i %></th>
-        <th class= "chapter-title" >
-          <%= link_to volume.title, pictures_show_path(id: volume.id), class: "chapter-title" %>
-          <%= link_to "position", picture_show_path(id: volume.id) %>
-          <% if current_user.id == @book.user_id %>
-            <%= link_to "edit", edit_volume_path(id: volume.id) %>
-            <%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %>
+        <th rowspan="2" class= "chapter-index"><%= i %></th>
+        <th class= "chapter-tt h-d-width" >
+          <%= link_to volume.title, pictures_show_path(id: volume.id), class: "chapter-title button-t-c" %>
+          <% if current_user.nil? || current_user.id == @book.user_id %>
+            <div class= "button"><%= link_to "position", picture_show_path(id: volume.id) %></div>
+            <div class= "button"><%= link_to "edit", edit_volume_path(id: volume.id) %></div>
+            <div class= "button"><%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %></div>
           <% end %>
         </th>
       </tr>
       <tr>
-        <td><%= volume.content %></td>
+        <td class= "h-d-width"><%= volume.content %></td>
       </tr>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
 </div>

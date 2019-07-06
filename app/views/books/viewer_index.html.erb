@@ -1,9 +1,9 @@
 <h1>Books#viewer_index</h1>
-<div class= "row book-bocks">
+<div class= "row border-css">
   <% @books.each do |book| %>
     <div class= "col-md-4 book-margin">
-      <%= link_to book.title, volume_path(book), class: "book-title" %><br>
-      <%= image_tag book.picture.url if book.picture.presence %>
+      <%= image_tag book.picture.url if book.picture.presence %><br>
+      <div class= "book-title"><%= link_to book.title, volume_path(book), class: "book-title button-t-c" %></div>
     </div>
   <% end %>
 </div>

@@ -1,10 +1,23 @@
 <h1>Users#index</h1>
-<%= @users.each do |user| %>
-
-  <%= user.name %>
-  <%= link_to "show", user_path(user) %>
-  <%= link_to 'edit', edit_user_path(user) %>
-  <%= link_to 'delete', user, method: :delete, data: { confirm: "削除してもいいですか？" }, class: "btn btn-primary" %>
-
-
-<% end %>
+<table class= "table table-bordered table-user">
+  <thead>
+    <tr>
+      <th class= "th-user">name</th>
+      <th class= "th-user">email</th>
+      <th class= "th-user">details</th>
+      <th class= "th-user">edit</th>
+      <th class= "th-user">destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "details", user_path(user) %></td>
+        <td><%= link_to 'edit', edit_user_path(user) %></td>
+        <td><%= link_to 'delete', user, method: :delete, data: { confirm: "削除してもいいですか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
