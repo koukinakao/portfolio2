@@ -12,6 +12,7 @@ class EvaluationsController < ApplicationController
   
   def new
     @evaluation = current_user.evaluations.build
+    @star = 0
     @book = Book.find_by(id: params[:book_id])
   end
   
@@ -28,6 +29,7 @@ class EvaluationsController < ApplicationController
   def edit
     @book = Book.find_by(id: params[:book_id])
     @evaluation = current_user.evaluations.find_by(book_id: @book.id)
+    @star = @evaluation.star
   end
   
   def update
