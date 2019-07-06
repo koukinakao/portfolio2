@@ -12,27 +12,27 @@
 <% unless @evalutop.nil? %>
   <div class= "evaluations-css border-css">
     高評価Top10<br>
-    <% @evalutop.each do |evalu| %>
+    <% @evalutop.each do |book| %>
       <div class= "sid-hr">
-        <div class= "book-image"><%= image_tag evalu.picture.url, :size =>'70x100' if evalu.picture.nil? %></div>
+        <div class= "book-image"><%= image_tag book.picture.url, :size =>'70x100' if book.picture.nil? %></div>
         <div class= "sid-cont">
-          <%= link_to evalu.title, volume_path(evalu), class: "button-t-c" %><br>
-          <div class="field" id="star-<%= evalu.id %>"></div>
-          <%= evalu_average(evalu) %>
+          <%= link_to book.title, volume_path(book), class: "button-t-c" %><br>
+          <div class="field" id="star-<%= book.id %>"></div>
+          <%= evalu_average(book) %>
         </div>
       </div>
       
       <script>
         $(window).ready(function(){
-          $('#star-<%= evalu.id %>').empty();
-          $('#star-<%= evalu.id %>').raty({
+          $('#star-<%= book.id %>').empty();
+          $('#star-<%= book.id %>').raty({
             size     : 36,
             starOff:  '<%= asset_path('star-off.png') %>',
             starOn : '<%= asset_path('star-on.png') %>', 
             starHalf: '<%= asset_path('star-half.png') %>',
             half: true,
             readOnly: true,
-            score: <%= evalu_average(evalu) %>
+            score: <%= evalu_average(book) %>
           });
         });
       </script>
