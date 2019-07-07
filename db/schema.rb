@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_022451) do
+ActiveRecord::Schema.define(version: 2019_07_07_065424) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 2019_07_04_022451) do
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
+    t.string "uid"
+    t.string "oauth_token"
+    t.string "oauth_expires_at"
   end
 
   create_table "volumes", force: :cascade do |t|

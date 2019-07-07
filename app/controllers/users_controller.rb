@@ -11,6 +11,37 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+  
+  def facebook_login
+  @user = User.from_omniauth(request.env["omniauth.auth"])
+    result = @user.save
+    if result
+      log_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to root_path
+    else
+      redirect_to auth_failure_path
+    end
+  end
+  
+  def google_login
+  @user = User.from_omniauth(request.env["omniauth.auth"])
+    result = @user.save
+    if result
+      log_in @user
+      flash[:success] = "Welcome to the Sample App!"
+      redirect_to root_path
+    else
+      redirect_to auth_failure_path
+    end
+  end
+
+#認証に失敗した際の処理
+def auth_failure 
+  @user = User.new
+  flash.now[:danger] = 'failed to login'
+  render 'sessions/new'
+end
 
   def new
     @user = User.new
@@ -21,7 +52,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      redirect_to books_posts(id: @user.id)
     else
       render :new
     end
@@ -35,7 +66,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "user updated"
-      redirect_to @user
+      redirect_to books_posts(id: @user.id)
     else
       render :edit
     end

@@ -1,5 +1,7 @@
 <div class= "border-k-m col-md-6 col-md-offset-3">
   <h1 class= "page-title">Sessions#new</h1>
+  <%= link_to "googleでログイン", "/auth/google_oauth2" %>
+    <%= link_to "Facebookでログイン", "/auth/facebook" %>
   <%= form_with( url: login_path, local: true) do |f| %>
 
     <%= f.label :email %>
