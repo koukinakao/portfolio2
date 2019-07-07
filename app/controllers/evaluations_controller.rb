@@ -20,8 +20,10 @@ class EvaluationsController < ApplicationController
     @book = Book.find_by(id: evaluation_params[:book_id])
     @evaluation = current_user.evaluations.build(evaluation_params)
     if @evaluation.save
+      flash[:success] = "評価を更新しました。"
       redirect_to volume_path(id: @book.id)
     else
+      flash.now[:danger] = '評価の更新に失敗しました。'
       render :new
     end
   end
@@ -36,8 +38,10 @@ class EvaluationsController < ApplicationController
     @book = Book.find_by(id: evaluation_params[:book_id])
     @evaluation = current_user.evaluations.find_by(book_id: @book.id)
     if @evaluation.update(evaluation_params)
+      flash[:success] = "評価を更新しました。"
       redirect_to volume_path(id: @book.id)
     else
+      flash.now[:danger] = '評価の更新に失敗しました。'
       render :edit
     end
   end
@@ -46,6 +50,7 @@ class EvaluationsController < ApplicationController
     @book = Book.find_by(id: params[:book_id])
     @evaluation = current_user.evaluations.find_by(book_id: @book.id)
     @evaluation.destroy
+    flash[:success] = "評価内容を削除しました。"
     redirect_to volume_path(id: @book.id)
   end
   

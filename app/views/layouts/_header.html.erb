@@ -7,26 +7,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "home", root_path, id: "logo" %>
+      <%= link_to "top", root_path, id: "logo" %>
     </div>
     <nav>
       <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
-        <li><%= link_to "home", root_path %></li>
+        <li><%= link_to "ホーム", root_path %></li>
         <% if logged_in? %>
         <% if current_user.admin? %>
-          <li><%= link_to "users", users_path %></li>
+          <li><%= link_to "ユーザー一覧", users_path %></li>
         <% end %>
           <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">profile<b class="caret"></b></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">メニュー<b class="caret"></b></a>
             <ul class = "dropdown-menu dropdown-menu-color">
-              <li><%= link_to "posts-books", books_posts_path(id: current_user.id) %></li>
-              <li><%= link_to "Setting", edit_user_path(current_user) %></li>
-              <li><%= link_to "logout", logout_path, method: :delete %></li>
+              <li><%= link_to "本棚", books_posts_path(id: current_user.id) %></li>
+              <li><%= link_to "設定", edit_user_path(current_user) %></li>
+              <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
             </ul>
            </li>
         <% else %>
-          <li><%= link_to 'new-user', new_user_path %> </li>
-          <li><%= link_to "login", login_path %></li>
+          <li><%= link_to 'アカウント作成', new_user_path %> </li>
+          <li><%= link_to "ログイン", login_path %></li>
         <% end %>
       </ul>
     </nav>

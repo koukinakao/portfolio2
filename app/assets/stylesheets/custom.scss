@@ -2,11 +2,15 @@
 @import "bootstrap";
 
 body {
-  background-image: url(768.png);
+  background-image: image-url("768.png");
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 60px;
   color: #000;
+}
+
+h1 {
+  text-align: center;
 }
 
 .page-title {
@@ -357,6 +361,23 @@ textarea {
 .volume_new_css {
   margin: 20px 0;
 }
+
+.user-show {
+  background-color: #fff;
+}
+
+.user-show-content {
+  text-align: center;
+}
+
+.user-show-title {
+  text-align: center;
+}
+
+.user-show-book-title {
+  text-align: center;
+}
+
 
 
 @media screen and (max-width:639px) {

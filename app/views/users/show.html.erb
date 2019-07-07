@@ -1,2 +1,30 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class= "margin-book user-show">
+  <div class= "user-show-title">
+    <h1><%= @user.name %></h1>
+  </div>
+  <div class= "user-show-content">
+    <div>名前:&emsp;<%= @user.name %>&emsp;<div class= "button"><%= link_to 'edit', edit_user_path(@user) %></div></div>
+    <div>メール:&emsp;<%= @user.email %></div>
+    <div>本棚:&emsp;<%= @user.books.count %></div>
+  </div>
+</div>
+
+<div class= "border-css">
+  <div class= "user-show-book-title"><h1>本一覧</h1></div>
+  <% @user.books.each do |book| %>
+    <div class= "book-details border-css-book">
+      <div class="book-image">
+        <%= image_tag book.picture.url unless book.picture.blank? %>
+      </div>
+      <div class="book-description">
+        <h1>タイトル: <%= link_to book.title, volume_path(book), class: "button-t-c" %></h1>
+          <div>
+            <div class= "button"><%= link_to 'edit', edit_book_path(book) %></div>
+            <div class= "button"><%= link_to 'destroy', book, method: :delete, data: { confirm: "削除してもいいですか？" } %></div>
+          </div>
+        <p>作成日: <%= book.created_at %></p>
+        <p>内容: <%= book.content %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -2,21 +2,19 @@
 <table class= "table table-bordered table-user">
   <thead>
     <tr>
-      <th class= "th-user">name</th>
-      <th class= "th-user">email</th>
-      <th class= "th-user">details</th>
-      <th class= "th-user">edit</th>
-      <th class= "th-user">destroy</th>
+      <th class= "th-user">名前</th>
+      <th class= "th-user">メール</th>
+      <th class= "th-user">詳細</th>
+      <th class= "th-user">削除</th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name, edit_user_path(user) %></td>
         <td><%= user.email %></td>
-        <td><%= link_to "details", user_path(user) %></td>
-        <td><%= link_to 'edit', edit_user_path(user) %></td>
-        <td><%= link_to 'delete', user, method: :delete, data: { confirm: "削除してもいいですか？" } %></td>
+        <td><%= link_to "詳細", user_path(user) %></td>
+        <td><%= link_to '削除', user, method: :delete, data: { confirm: "削除してもいいですか？" } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -12,10 +12,10 @@ class SessionsController < ApplicationController
       log_in user
       #[remember me] チェックボックスの送信結果を処理する
       params[:remember_me] == '1' ? remember(user) : forget(user)
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "ログインしました。"
       redirect_to root_path
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'メールアドレスかパスワードが違うためログインできませんでした。'
       render :new
     end
   end

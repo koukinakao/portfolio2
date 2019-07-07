@@ -1,0 +1,127 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      micropost:
+      volume:
+      evaluation:
+      session:
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        affiliation: "所属"
+        employee_number: "社員番号"
+        uid : "カードID"
+        basic_work_time: "基本勤務時間"
+        designated_work_start_time: "指定勤務開始時間"
+        designated_work_end_time: "指定勤務終了時間"
+      book:
+        title: "タイトル"
+        content: "本の内容"
+      volume:
+        title: "タイトル"
+        content: "巻の内容"
+      evaluation:
+        star: "評価"
+        comment: "コメント"
+      session:
+        email: "メールアドレス"
+        password: "パスワード"
+  activemodel:
+    models:
+      inquiry:
+    attributes:
+      inquiry:
+        name: "名前"
+        email: "メールアドレス"
+        message: "お問い合わせ内容"
+  users:
+    name: "名前"
+    email: "メールアドレス"
+    password: "パスワード"
+    confirmation: "確認用パスワード"
+    delete: "( 削除 )"
+    new:
+      sign_in: "新規登録"
+    index:
+      All users: "ユーザー一覧"
+    edit:
+      password_reset: "(パスワードのリセット)"
+      Edit user: "ユーザー編集"
+    show_follow:
+      view my profile: "プロフィール"
+  sessions:
+    name: "名前"
+    email: "メールアドレス"
+    password: "パスワード"
+    confirmation: "確認用パスワード"
+    password_reset: "(パスワードのリセット)"
+    sign_in: "ログイン"
+    signup: "新規登録"
+    new: 
+      sign_in: "ログイン"
+      signup: "新規登録"
+      password_reset: "(パスワードリセット)"
+    create:
+      Invalid email / password combination: "メールアドレスまたはパスワードが間違っています。"
+      Account not activated.: "アカウントが有効ではありません。"
+      Check your email for the activation link.: "アカウントの有効化については、メールを確認して下さい。"
+  static_pages:
+    home:
+      Micropost: "投稿一覧"
+      About: "Gamesサイト説明"
+      Signup: "新規登録"
+  microposts:
+    micropost:
+      delete: "( 削除 )"
+      You sure?: "本当に削除してもよろしいですか？"
+  password_resets:
+    email: "メールアドレス"
+    password: "パスワード"
+    password_confirmation: "確認用パスワード"
+    edit:
+      email: "メールアドレス"
+      Reset password: "パスワードリセット"
+    new: 
+      email: "メールアドレス"
+      Forgot password: "パスワードリセット"
+  helpers:
+    submit:
+      create: "登録する"
+      update: "更新する"
+      submit: "保存する"
+    label:
+      session:
+        email: "メールアドレス"
+        password: "パスワード"
+      password_reset:
+        email: "メールアドレス"
+        password: "パスワード"
+    password_confirmation: "確認用パスワード"
+  errors:
+    messages:
+      already_confirmed: "は既に登録済みです。ログインしてください"
+      confirmation_period_expired: "%{period}以内に確認する必要がありますので、新しくリクエストしてください。"
+      expired: "有効期限切れです。新規登録してください。"
+      not_found: "は見つかりませんでした。"
+      not_locked: "ロックされていません。"
+      not_saved:
+        one: "１つのエラーがあります。修正して再度送信して下さい。:"
+        other: "%{count}のエラーがあります。修正して再度送信して下さい。"
+      taken: "は既に使用されています。"
+      blank: "が入力されていません。"
+      too_short: "は%{count}文字以上にして下さい。"
+      too_long: "は%{count}文字以下にして下さい。"
+      invalid: "は有効ではありません。"
+      confirmation: "が内容とあっていません。"
+  shared:
+    error_messages:
+      error: "個のエラーがあります。"
+    user_info:
+      view my profile: "プロフィール"
+      micropost: "投稿"
+  delete: "( 削除 )"
+      

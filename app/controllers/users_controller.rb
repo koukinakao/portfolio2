@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     result = @user.save
     if result
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "facebookアカウントでログインしました。"
       redirect_to root_path
     else
       redirect_to auth_failure_path
@@ -25,23 +25,23 @@ class UsersController < ApplicationController
   end
   
   def google_login
-  @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = User.from_omniauth(request.env["omniauth.auth"])
     result = @user.save
     if result
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "googleアカウントでログインしました。"
       redirect_to root_path
     else
       redirect_to auth_failure_path
     end
   end
 
-#認証に失敗した際の処理
-def auth_failure 
-  @user = User.new
-  flash.now[:danger] = 'failed to login'
-  render 'sessions/new'
-end
+  #認証に失敗した際の処理
+  def auth_failure 
+    @user = User.new
+    flash.now[:danger] = 'ログインに失敗しました。'
+    render 'sessions/new'
+  end
 
   def new
     @user = User.new
@@ -51,9 +51,10 @@ end
     @user = User.create(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to books_posts(id: @user.id)
+      flash[:success] = "ログインしました。"
+      redirect_to books_posts_path(id: @user.id)
     else
+      flash.now[:danger] = 'アカウントの作成に失敗しました。'
       render :new
     end
   end
@@ -65,17 +66,18 @@ end
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "user updated"
-      redirect_to books_posts(id: @user.id)
+      flash[:success] = "ユーザー情報を更新しました。"
+      redirect_to books_posts_path(id: @user.id)
     else
+      flash.now[:danger] = 'ユーザー情報の更新に失敗しました。'
       render :edit
     end
   end
   
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_path
+    flash[:success] = "ユーザーを削除しました。"
+    redirect_to root_path
   end
   
   private
