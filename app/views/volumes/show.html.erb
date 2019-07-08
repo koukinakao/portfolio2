@@ -25,7 +25,9 @@
         });
       });
     </script>
-    <%= render 'favorites/favorite' %><br>
+    <% unless current_user.nil? %>
+      <%= render 'favorites/favorite' if current_user.id == @book.user.id %><br>
+    <% end %>
     <p>作成者: <%= link_to user_name_chenge(@book), books_posts_path(id: @book.user_id), class: "button-t-c" %></p>
     <p>
       作成日: <%= @book.created_at %>&emsp;&emsp;
@@ -40,21 +42,22 @@
   <div class= "volume-new-bottom">
     <div class= "border-css">
       <% if current_user.nil? %>
-        <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+        <div class= "button"><%= link_to "コメント一覧", evaluation_path(book_id: @book.id) %></div>
       <% else %>
         <% if current_user.id == @book.user_id %>
-          <div class= "button volume_new_css"><%= link_to "new", new_volume_path(id: @book.id) %></div>
+          <div class= "button volume_new_css"><%= link_to "新規作成", new_volume_path(id: @book.id) %></div>
+          <div class= "button"><%= link_to "コメント一覧", evaluation_path(book_id: @book.id) %></div>
         <% else %>
           <% if @evaluation.nil? %>
             まだ評価していません。
-            <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
-            <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+            <div class= "button"><%= link_to "評価する", new_evaluation_path(book_id: @book.id) %></div>
+            <div class= "button"><%= link_to "コメント一覧", evaluation_path(book_id: @book.id) %></div>
           <% else %>
-            name:<%= current_user.name %>
-            <div class= "button"><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
-            <div class= "button"><%= link_to "coment_show", evaluation_path(book_id: @book.id) %></div>
+            名前:<%= current_user.name %>
+            <div class= "button"><%= link_to "編集", edit_evaluation_path(book_id: @book.id) %></div>
+            <div class= "button"><%= link_to "評価一覧", evaluation_path(book_id: @book.id) %></div>
             <div>
-              star:<div class="field" id="star"></div><%= @evaluation.star %>
+              評価:<div class="field" id="star"></div><%= @evaluation.star %>
             </div>
             <script>
               $(window).ready(function(){
@@ -70,7 +73,7 @@
             </script>
             
             <div>
-              comment:&emsp;<%= @evaluation.comment %>
+              コメント:&emsp;<%= @evaluation.comment %>
             </div>
           <% end %>
         <% end %>
@@ -85,9 +88,9 @@
         <th class= "chapter-tt h-d-width" >
           <%= link_to volume.title, pictures_show_path(id: volume.id), class: "chapter-title button-t-c" %>
           <% if !current_user.nil? && current_user.id == @book.user_id %>
-            <div class= "button"><%= link_to "position", picture_show_path(id: volume.id) %></div>
-            <div class= "button"><%= link_to "edit", edit_volume_path(id: volume.id) %></div>
-            <div class= "button"><%= link_to 'destroy', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %></div>
+            <div class= "button"><%= link_to "順番変更", picture_show_path(id: volume.id) %></div>
+            <div class= "button"><%= link_to "編集", edit_volume_path(id: volume.id) %></div>
+            <div class= "button"><%= link_to '削除', volume, method: :delete, data: { confirm: "削除してもいいですか？" } %></div>
           <% end %>
         </th>
       </tr>

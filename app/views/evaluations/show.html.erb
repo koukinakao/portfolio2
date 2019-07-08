@@ -7,9 +7,9 @@
     <% end %>
   </div>
   <div class="book-description">
-    <h1>Title: <%= @book.title %></h1>
+    <h1><%= @book.title %></h1>
     <div>
-      star:<div class="field" id="star-raty-book"></div><%= evalu_average(@book) %>
+      評価: <div class="field" id="star-raty-book"></div><%= evalu_average(@book) %>
     </div>
     <script>
       $(window).ready(function(){
@@ -26,31 +26,31 @@
       });
     </script>
     <%= render 'favorites/favorite' %><br>
-    <p>Author: <%= link_to user_name_chenge(@book), books_posts_path(id: @book.user_id), class: "button-t-c" %></p>
+    <p>作成者: <%= link_to user_name_chenge(@book), books_posts_path(id: @book.user_id), class: "button-t-c" %></p>
     <p>
-      Created date: <%= @book.created_at %>&emsp;&emsp;
-      Updated date: <%= @book.updated_at %>
+      作成日: <%= @book.created_at %>&emsp;&emsp;
+      更新日: <%= @book.updated_at %>
     </p>
-    <p>content:&emsp;<%= @book.content %></p>
+    <p>内容:&emsp;<%= @book.content %></p>
   </div>
 </div>
 
 <div class= "book-details border-css-book evaluation-user">
   <div>
     <% unless current_user.nil? || @user_evaluation.blank? %>
-      name:<%= current_user.name %>
+      名前:<%= current_user.name %>
     <% end %>
     <% if @user_evaluation.nil? %>
       まだ評価をしていません。
-      <div class= "button"><%= link_to "coment_new", new_evaluation_path(book_id: @book.id) %></div>
+      <div class= "button"><%= link_to "評価する", new_evaluation_path(book_id: @book.id) %></div>
     <% else %>
-      <div class= "button"><%= link_to "coment_edit", edit_evaluation_path(book_id: @book.id) %></div>
+      <div class= "button"><%= link_to "編集", edit_evaluation_path(book_id: @book.id) %></div>
     <% end %>
   </div>
   
   <% unless current_user.nil? || @user_evaluation.blank? %>
     <div>
-      star:<div class="field" id="star"></div><%= @user_evaluation.star %>
+      評価:<div class="field" id="star"></div><%= @user_evaluation.star %>
     </div>
       <script>
         $(window).ready(function(){
@@ -66,7 +66,7 @@
       </script>
           
     <div>
-      comment:&emsp;<%= @user_evaluation.comment %>
+      コメント:&emsp;<%= @user_evaluation.comment %>
     </div>
   <% end %>
 </div>
@@ -75,11 +75,11 @@
 <% @evaluations.each do |evaluation| %>
   <div class= "book-details border-css-book">
     <div>
-      name:<%= evaluation.user_id %>
+      名前:<%= evaluation.user_id %>
     </div>
     
     <div>
-      star:<div class="field" id="star-rate-<%= evaluation.id %>"></div><%= evaluation.star %>
+      評価:<div class="field" id="star-rate-<%= evaluation.id %>"></div><%= evaluation.star %>
     </div>
       <script>
         $(window).ready(function(){
@@ -95,7 +95,7 @@
       </script>
           
     <div>
-      commentv:&emsp;<%= evaluation.comment %>
+      コメント:&emsp;<%= evaluation.comment %>
     </div>
   </div>
 <% end %>

@@ -7,7 +7,7 @@
       <div class="book-description">
         <h1><%= link_to chenge_book(favorite).title, volume_path(chenge_book(favorite)), class: "button-t-c" %></h1>
         <p>作成日: <%= chenge_book(favorite).created_at %></p>
-        <p>作成者<%= chenge_user(favorite).name %></p>
+        <p>作成者: <%= chenge_user(favorite).name %></p>
         <p>内容: <%= chenge_book(favorite).content %></p>
       </div>
     </div>

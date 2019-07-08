@@ -1,5 +1,5 @@
 class VolumesController < ApplicationController
-  before_action :logged_in_user, only: [:picture_position_show, :picture_show_chenge, :change_position, :new, :create, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:picture_position_show, :change_position, :new, :create, :edit, :update, :destroy]
   before_action :evaluations_number
   
   def index
@@ -83,7 +83,7 @@ class VolumesController < ApplicationController
       redirect_to volume_path(id: @volume.book_id)
     else
       if picture_params[:pictures_attributes]["0"][:picture].nil?
-        flash.now[:danger] = "Picture can't be blank"
+        flash.now[:danger] = "画像が選択されていません。"
       end
       1.times { @volume.pictures.build }
       render :new

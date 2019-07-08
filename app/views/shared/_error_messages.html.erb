@@ -1,9 +1,6 @@
 <% unless @user.nil? %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <div class="alert alert-danger">
-        The form contains <%= pluralize(@user.errors.count, "error") %>.
-      </div>
       <ul>
         <div class="alert alert-danger">
         <% @user.errors.full_messages.each do |msg| %>
@@ -18,9 +15,6 @@
 <% unless @book.nil? %>
   <% if @book.errors.any? %>
     <div id="error_explanation">
-      <div class="alert alert-danger">
-        The form contains <%= pluralize(@book.errors.count, "error") %>.
-      </div>
       <ul>
         <div class="alert alert-danger">
         <% @book.errors.full_messages.each do |msg| %>
@@ -35,9 +29,6 @@
 <% unless @volume.nil? %>
   <% if @volume.errors.any? %>
     <div id="error_explanation">
-      <div class="alert alert-danger">
-        The form contains <%= pluralize(@volume.errors.count, "error") %>.
-      </div>
       <ul>
         <div class="alert alert-danger">
         <% @volume.errors.full_messages.each do |msg| %>
@@ -52,9 +43,6 @@
 <% unless @evaluation.nil? %>
   <% if @evaluation.errors.any? %>
     <div id="error_explanation">
-      <div class="alert alert-danger">
-        The form contains <%= pluralize(@evaluation.errors.count, "error") %>.
-      </div>
       <ul>
         <div class="alert alert-danger">
         <% @evaluation.errors.full_messages.each do |msg| %>
