@@ -2,4 +2,5 @@
   <%= link_to "←", picture_show_chenge_volume_path(id: @picture.volume_id, move: "up", position: @picture.position), remote: true, class: "chenge-picuture-show-left" %>
   <%= image_tag @picture.picture.url, class: "image-picuture-show" %>
   <%= link_to "→", picture_show_chenge_volume_path(id: @picture.volume_id, move: "down", position: @picture.position), remote: true, class: "chenge-picuture-show-right" %>
+  <%= link_to "×", volume_path(id: @picture.volume.book_id), class: "back-position" %>
 </div>
