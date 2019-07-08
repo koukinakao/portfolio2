@@ -23,7 +23,7 @@ class EvaluationsController < ApplicationController
       flash[:success] = "評価を更新しました。"
       redirect_to volume_path(id: @book.id)
     else
-      @star = evaluation_params[:star]
+      @star = evaluation_params[:star].to_i
       flash.now[:danger] = '評価の更新に失敗しました。'
       render :new
     end
@@ -42,7 +42,7 @@ class EvaluationsController < ApplicationController
       flash[:success] = "評価を更新しました。"
       redirect_to volume_path(id: @book.id)
     else
-      @star = evaluation_params[:star]
+      @star = evaluation_params[:star].to_i
       flash.now[:danger] = '評価の更新に失敗しました。'
       render :edit
     end
