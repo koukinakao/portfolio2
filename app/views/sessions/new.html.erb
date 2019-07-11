@@ -1,26 +1,32 @@
-<div class= "border-k-m col-md-6 col-md-offset-3">
+<div class= "border-k-m col-md-8 col-md-offset-2">
   <h1 class= "page-title">ログイン</h1>
-  <%= link_to "googleアカウントでログイン", "/auth/google_oauth2" %>
-    <%= link_to "Facebookアカウントでログイン", "/auth/facebook" %>
-  <%= form_with( url: login_path, local: true) do |f| %>
+  <div class= "container">
+    <div class= "row">
+      <div class= "col-sm-4">
+        <%= link_to image_tag("google.png", width: '100%', alt: "googleアカウント", class: "login-h" ), "/auth/google_oauth2" %>
+        <%= link_to image_tag("facebook.png", width: '100%', alt: "Facebookアカウント", class: "login-h" ), "/auth/facebook" %>
+        <%= link_to '新規登録', new_user_path, class: "btn btn-primary login-m login-h" %>
+      </div>
+      <div class= "col-sm-4">
+        <%= form_with( url: login_path, local: true) do |f| %>
 
-    <%= f.label "メールアドレス" %>
-    <%= f.email_field :email, class: "form-control" %>
+          <%= f.label "メールアドレス" %>
+          <%= f.email_field :email, class: "form-control" %>
    
-    <%= f.label "パスワード" %>
-    <%= f.password_field :password, class: "form-control" %>
-  
-    <%= f.label :remember_me do %>
-      <%= f.check_box :remember_me %>
-      <span>ログイン状態を維持する。</span>
-    <% end %>
-  
-    <div class= "submit-button">
-      <%= f.submit "ログイン", class: "btn btn-primary" %>
-    </div>
+          <%= f.label "パスワード" %>
+          <%= f.password_field :password, class: "form-control" %>
     
-    <%= link_to 'キャンセル', root_path %>
-    <%= link_to '新規登録', new_user_path, class: "login-m" %>
+          <%= f.label :remember_me do %>
+            <%= f.check_box :remember_me %>
+            <span>ログイン状態を維持する。</span>
+          <% end %>
+  
+          <div class= "submit-button">
+            <%= f.submit "ログイン", class: "btn btn-primary" %>
+          </div>
 
-  <% end %> 
+        <% end %> 
+      </div>
+    </div>
+  </div>
 </div>

@@ -6,7 +6,9 @@ class EvaluationsController < ApplicationController
     @book = Book.find_by(id: params[:book_id])
     @evaluations = Book.find_by(id: @book.id).evaluations
     unless current_user.nil?
-      @user_evaluation = @evaluations.find_by(user_id: current_user.id)
+      unless @book.user_id == current_user.id
+        @user_evaluation = @evaluations.find_by(user_id: current_user.id)
+      end
     end
   end
   

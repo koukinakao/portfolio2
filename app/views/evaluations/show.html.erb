@@ -35,42 +35,45 @@
   </div>
 </div>
 
-<div class= "book-details border-css-book evaluation-user">
-  <div>
-    <% unless current_user.nil? || @user_evaluation.blank? %>
-      名前:<%= current_user.name %>
-    <% end %>
-    <% if @user_evaluation.nil? %>
-      まだ評価をしていません。
-      <div class= "button"><%= link_to "評価する", new_evaluation_path(book_id: @book.id) %></div>
-    <% else %>
-      <div class= "button"><%= link_to "編集", edit_evaluation_path(book_id: @book.id) %></div>
+<% unless current_user.nil? %>
+  <% unless @book.user_id == current_user.id %>
+  <div class= "book-details border-css-book evaluation-user">
+    <div>
+      <% unless @user_evaluation.blank? %>
+        名前:<%= current_user.name %>
+      <% end %>
+      <% if @user_evaluation.nil? %>
+        まだ評価をしていません。
+        <div class= "button"><%= link_to "評価する", new_evaluation_path(book_id: @book.id) %></div>
+      <% else %>
+        <div class= "button"><%= link_to "編集", edit_evaluation_path(book_id: @book.id) %></div>
+      <% end %>
+    </div>
+   
+    <% unless @user_evaluation.blank? %>
+      <div>
+        評価:<div class="field" id="star"></div><%= @user_evaluation.star %>
+      </div>
+        <script>
+          $(window).ready(function(){
+            $('#star').empty();
+            $('#star').raty({
+              size    : 36,
+              starOff :  '<%= asset_path('star-off.png') %>',
+              starOn  : '<%= asset_path('star-on.png') %>', 
+              readOnly: true,
+              score   :<%= @user_evaluation.star %>,
+            });
+          });
+        </script>
+          
+      <div>
+        コメント:&emsp;<%= @user_evaluation.comment %>
+      </div>
     <% end %>
   </div>
-  
-  <% unless current_user.nil? || @user_evaluation.blank? %>
-    <div>
-      評価:<div class="field" id="star"></div><%= @user_evaluation.star %>
-    </div>
-      <script>
-        $(window).ready(function(){
-          $('#star').empty();
-          $('#star').raty({
-            size    : 36,
-            starOff :  '<%= asset_path('star-off.png') %>',
-            starOn  : '<%= asset_path('star-on.png') %>', 
-            readOnly: true,
-            score   :<%= @user_evaluation.star %>,
-          });
-        });
-      </script>
-          
-    <div>
-      コメント:&emsp;<%= @user_evaluation.comment %>
-    </div>
   <% end %>
-</div>
-
+<% end %>
 
 <% @evaluations.each do |evaluation| %>
   <div class= "book-details border-css-book">
