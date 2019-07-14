@@ -23,7 +23,7 @@ ja:
         content: "本の内容"
       volume:
         title: "タイトル"
-        content: "巻の内容"
+        content: "話数の内容"
       evaluation:
         star: "評価"
         comment: "コメント"

@@ -24,7 +24,7 @@ User.create!(name:  "竹村洋平@takemura4hey",
 
 2.times do |n|
   name  = Faker::Name.name
-  email = "test-#{n+1}@railstutorial.com"
+  email = "test-#{n+1}@gmail.com"
   password = "password"
   User.create!(name:  name,
                email: email,

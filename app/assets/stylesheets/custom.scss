@@ -21,6 +21,10 @@ ul {
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 .field_with_errors {
   @extend .has-error;
   .form-control {
@@ -50,6 +54,8 @@ ul {
 
 .table-bordered > tbody > tr > .td-center {
   line-height: 300px;
+  text-align: center;
+  font-size: 18px;
 }
 
 .login-m {
@@ -398,6 +404,47 @@ textarea {
   margin-top: 5px;
   height: 50px;
   font-size: 25px;
+}
+
+.jump-top {
+  margin-top:-100px;
+  padding-top:100px;
+}
+
+.table-contents-top {
+  display: block;
+  margin-left: 10px;
+  color: #000;
+}
+
+.table-contents-content {
+  border-bottom: 1px solid #00ceff;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+}
+
+.table-contents-margin {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.alert-danger-table-box {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  margin: 20px 10px;
+  border-radius: 10px;
+  padding: 5px 0;
+}
+
+.ale-den-tabl-content {
+  margin-left: 10px;
+}
+
+.table_content_picture {
+  width: 90%;
+  margin: 10px 10px;
+  border: 1px solid #000;
 }
 
 

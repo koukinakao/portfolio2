@@ -1,1 +1,152 @@
-<h1>FreeManga</h1>
+<h1>説明画面</h1>
+
+<div class= "border-css table-contents-margin">
+  <a href= "#account-me-top" class= "table-contents-top">ユーザー登録・編集</a>
+  <a href= "#login-out-top" class= "table-contents-top">ログイン・ログアウト</a>
+  <a href= "#bokk-me-top"class= "table-contents-top">本の作成・編集</a>
+  <a href= "#storie-me-top" class= "table-contents-top">話数の作成・編集</a>
+  <a href= "#order-e-top" class= "table-contents-top">順番の編集</a>
+  <a href= "#favolite-top" class= "table-contents-top">お気に入り登録</a>
+  <a href= "#evaluation-me-top" class= "table-contents-top">評価の仕方・編集</a>
+</div>
+
+<div class= "border-css table-contents-margin">
+  <div>
+    <ul class= "table-contents-content">
+      <h2 id="account-me-top" class= "jump-top">アカウントの作成・編集</h2>
+      <h3>作成</h3>
+      <li>
+        ヘッダーのアカウント作成ボタンからアカウント作成ページ（新規登録）に行き、作成を行ってください。
+      </li>
+      <%= image_tag 'picture1.png', :class => "table_content_picture"%>
+      <h3>編集</h3>
+      <li>
+        ヘッダーのメニューから設定を選択し、編集を行ってください。
+        編集ではパスワードは入力不要です。
+      </li>
+      <%= image_tag 'picture2.png', :class => "table_content_picture"%>
+      <div>
+        <ul class="alert-danger-table-box">
+          <li class= "ale-den-tabl-content">※1　名前は50文字以下・空白以外で作成してください。</li>
+          <li class= "ale-den-tabl-content">※2　メールアドレスは300文字以下・空白以外で作成してください。</li>
+          <li class= "ale-den-tabl-content">※1　パスワードは6文字以上・半角英数文字・空白以外で作成してください。</li>
+        </ul>
+      </div>
+    </ul>
+    <ul class= "table-contents-content">
+      <h2 id="login-out-top" class= "jump-top">ログイン・ログアウト</h2>
+      <h3>ログイン</h3>
+      <li>
+        ヘッダーのログインボタンからログインページに行き、メールアドレスとパスワードにてログインを行う。
+      </li>
+      <%= image_tag 'picture3.png', :class => "table_content_picture"%>
+      <h3>ログアウト</h3>
+      <li>
+        ヘッダーのリンクからログアウトする。
+      </li>
+      <%= image_tag 'picture4.png', :class => "table_content_picture"%>
+    </ul>
+    <ul class= "table-contents-content">
+      <h2 id="bokk-me-top" class= "jump-top">本の作成・編集</h2>
+      <h3>作成</h3>
+      <li>
+        本棚に行き、新規作成ボタンから作成ページに行く。
+        タイトル・内容・表紙の画像を登録する。
+      </li>
+      <%= image_tag 'picture5.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture6.png', :class => "table_content_picture"%>
+      <h3>編集</h3>
+      <li>
+        本のタイトルをクリックし、詳細ページに行きます。
+        本の名前の下にある編集ボタンから編集ページに行き、編集を行います。
+      </li>
+      <%= image_tag 'picture7.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture8.png', :class => "table_content_picture"%>
+      <div>
+        <ul class="alert-danger-table-box">
+          <li class= "ale-den-tabl-content">※1　タイトルは50文字以下・空白で作成してください。</li>
+          <li class= "ale-den-tabl-content">※2　内容は300文字以下・空白で作成してください。</li>
+        </ul>
+      </div>
+    </ul>
+    <ul class= "table-contents-content">
+      <h2 id="storie-me-top" class= "jump-top">話数の作成・編集</h2>
+      <h3>作成</h3>
+      <li>
+        本のタイトルから本の詳細ページに行き、新規作成ボタンから作成ページに行く。
+        タイトル・内容・画像を登録する。
+      </li>
+      <%= image_tag 'picture9.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture10.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture11.png', :class => "table_content_picture"%>
+      <h3>編集</h3>
+      <li>
+        本のタイトルから本の詳細ページに行き、話数のタイトルの横にある編集ボタンから編集ページに行く。
+        タイトル・内容・画像を編集する。
+      </li>
+      <%= image_tag 'picture9.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture12.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture13.png', :class => "table_content_picture"%>
+      <div>
+        <ul class="alert-danger-table-box">
+          <li class= "ale-den-tabl-content">※1　タイトルは50文字以上・空白では作成できません。</li>
+          <li class= "ale-den-tabl-content">※2　内容は300文字以上・空白では作成できません。</li>
+          <li class= "ale-den-tabl-content">※2　画像は空白・（.jpg .jpeg .gif .png）形式の画像で作成してください。</li>
+        </ul>
+      </div>
+    </ul>
+    <ul class= "table-contents-content">
+      <h2 id="order-e-top" class= "jump-top">順番の編集</h2>
+      <h3>編集</h3>
+      <li>
+        本のタイトルから本の詳細ページに行き、話数のタイトルの横にある順番変更ボタンから編集ページに行く。
+        編集ページの右側にある並び替えの列から順番を変更する。
+      </li>
+      <%= image_tag 'picture9.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture12.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture14.png', :class => "table_content_picture"%>
+      <div>
+        <ul class="alert-danger-table-box">
+          <li class= "ale-den-tabl-content">※1　一番右の列は画像の順番が表示されています。</li>
+          <li class= "ale-den-tabl-content">※2　（▲）は画像の順番が上がります。 （▼）は画像の順番が下がります。</li>
+        </ul>
+      </div>
+    </ul>
+    <ul class= "table-contents-content">
+      <h2 id="favolite-top" class= "jump-top">お気に入り機能</h2>
+      <h3>お気に入り</h3>
+      <li>
+        本のタイトルから本の詳細ページに行き、タイトルの下にあるお気に入りボタンをクリックする。
+      </li>
+      <%= image_tag 'picture16.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture15.png', :class => "table_content_picture"%>
+    </ul>
+    <ul class= "table-contents-content">
+      <h2 id="evaluation-me-top" class= "jump-top">評価の作成・編集</h2>
+      <h3>作成</h3>
+      <li>
+        本のタイトルから本の詳細ページに行き、評価一覧ボタンから評価一覧ページに行く。
+        評価一覧ページにある評価するボタンから作成ページに行き、評価をする。
+      </li>
+      <%= image_tag 'picture16.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture10.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture17.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture19.png', :class => "table_content_picture"%>
+      <h3>編集</h3>
+      <li>
+        本のタイトルから本の詳細ページに行き、評価一覧ボタンから評価一覧ページに行く。
+        評価一覧ページにある編集ボタンから編集ページに行き、編集する。
+      </li>
+      <%= image_tag 'picture16.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture10.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture21.png', :class => "table_content_picture"%>
+      <%= image_tag 'picture20.png', :class => "table_content_picture"%>
+      <div>
+        <ul class="alert-danger-table-box">
+          <li class= "ale-den-tabl-content">※1　評価は5段階から選んでください。</li>
+          <li class= "ale-den-tabl-content">※1　コメントは300文字以上・空白では作成できません。</li>
+        </ul>
+      </div>
+    </ul>
+  </div>
+</div>
