@@ -42,7 +42,7 @@ end
 books = Book.order(:created_at)
 1.times do |n|
   books.each { |book| book.volumes.create!(
-               title: 1,
+               title: "これは本の話数のタイトルです",
                content: "It was very good. We will support you from now on, so please do your best.",
                ) }
 end
