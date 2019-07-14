@@ -79,7 +79,7 @@ class VolumesController < ApplicationController
       picture_params[:pictures_attributes]["0"][:picture].map do |d|
         @volume.pictures.create!(picture: d)
       end
-      flash[:success] = "volume created"
+      flash[:success] = "話数を作成しました。"
       redirect_to volume_path(id: @volume.book_id)
     else
       if picture_params[:pictures_attributes]["0"][:picture].nil?
@@ -116,7 +116,7 @@ class VolumesController < ApplicationController
           end
         end
       end
-      flash[:success] = "volume updated"
+      flash[:success] = "話数を更新しました。"
       redirect_to volume_path(id: @volume.book_id)
     else
       1.times { @volume.pictures.build }
@@ -128,7 +128,7 @@ class VolumesController < ApplicationController
     @volume = Volume.find(params[:id])
     @book = Book.find_by(id: @volume.book_id)
     @volume.destroy
-    flash[:success] = "volume deleted"
+    flash[:success] = "話数を削除しました。"
     redirect_to volume_path(id: @book.id)
   end
   
