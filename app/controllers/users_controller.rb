@@ -12,7 +12,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
+  def facebook
+    callback_for(:facebook)
+  end
+
+  def google_oauth2
+    callback_for(:google)
+  end
+  
   def facebook_login
+  if callback_for(:facebook)
   @user = User.from_omniauth(request.env["omniauth.auth"])
     result = @user.save
     if result
@@ -23,8 +32,10 @@ class UsersController < ApplicationController
       redirect_to auth_failure_path
     end
   end
+  end
   
   def google_login
+    if callback_for(:google)
     @user = User.from_omniauth(request.env["omniauth.auth"])
     result = @user.save
     if result
@@ -34,6 +45,7 @@ class UsersController < ApplicationController
     else
       redirect_to auth_failure_path
     end
+  end
   end
 
   #認証に失敗した際の処理
