@@ -14,7 +14,7 @@
     高評価Top10<br>
     <% @evalutop.each do |book| %>
       <div class= "sid-hr">
-        <div class= "book-image"><%= image_tag book.picture.url, :size =>'70x100' if book.picture.nil? %></div>
+        <div class= "book-image"><%= image_tag book.picture.url, :size =>'70x100' if book.picture.presence %></div>
         <div class= "sid-cont">
           <%= link_to book.title, volume_path(book), class: "button-t-c" %><br>
           <div class="field" id="star-<%= book.id %>"></div>
